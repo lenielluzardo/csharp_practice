@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Algorithms-DataStructure\SinglyLinkedList.cs~RF1abee6a4.TMP" />
+  </ItemGroup>
+
 </Project>
