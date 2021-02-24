@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Output": {
+      "commandName": "Project",
+      "commandLineArgs": "--dir E:\\lenielluzardo\\2020_03-coding_exe\\Output\\Files_Streams\\Files\\input TEXT",
+      "remoteDebugEnabled": false
+    }
+  }
+}

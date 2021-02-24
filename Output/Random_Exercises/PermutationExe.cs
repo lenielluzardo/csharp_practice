@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Output
+namespace Output.Random_Exercises
 {
     public class PermutationExe
     {

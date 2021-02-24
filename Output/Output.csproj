@@ -6,7 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Algorithms-DataStructure\SinglyLinkedList.cs~RF1abee6a4.TMP" />
+    <Compile Remove="Files_Streams\Resources\**" />
+    <EmbeddedResource Remove="Files_Streams\Resources\**" />
+    <None Remove="Files_Streams\Resources\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Algorithms_DataStructure\SinglyLinkedList.cs~RF1abee6a4.TMP" />
   </ItemGroup>
 
 </Project>
