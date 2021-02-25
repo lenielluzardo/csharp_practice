@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Abstractions;
 using System.Linq;
 using System.Text;
 using CsvHelper;
@@ -12,10 +13,14 @@ namespace Output.Files_Streams
 {
    public class CsvFileProcessor
    {
-      public CsvFileProcessor(string inputFilePath, string outputFilePath)
+      private readonly IFileSystem _fileSystem;
+      public CsvFileProcessor(string inputFilePath, string outputFilePath) : this(inputFilePath, outputFilePath, new FileSystem()) { }
+      public CsvFileProcessor(string inputFilePath, string outputFilePath, IFileSystem fileSystem)
       {
          InputFilePath = inputFilePath;
          OutputFilePath = outputFilePath;
+         _fileSystem = fileSystem;
+
          CsvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture)
          {
             Comment = '@',
@@ -34,7 +39,6 @@ namespace Output.Files_Streams
 
          };
 
-
       }
 
       public string InputFilePath { get; }
@@ -48,9 +52,9 @@ namespace Output.Files_Streams
 
       private void ProcessAsEntityCsv()
       {
-         using (StreamReader input = File.OpenText(InputFilePath))
+         using (StreamReader input = _fileSystem.File.OpenText(InputFilePath))
          using (CsvReader csvReader = new CsvReader(input, CsvConfiguration))
-         using (StreamWriter output = File.CreateText(OutputFilePath))
+         using (StreamWriter output = _fileSystem.File.CreateText(OutputFilePath))
          using (var csvWriter = new CsvWriter(output, CsvConfiguration))
          {
             IEnumerable<ProcessedOrder> records = csvReader.GetRecords<ProcessedOrder>();

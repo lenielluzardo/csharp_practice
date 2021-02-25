@@ -1,15 +1,20 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.IO.Abstractions;
 
 namespace Output.Files_Streams
 {
    public class BinaryFileProcessor
    {
-      public BinaryFileProcessor(string inputFilePath, string outputFilePath)
+      private readonly IFileSystem _fileSystem;
+
+      public BinaryFileProcessor(string inputFilePath, string outputFilePath) : this(inputFilePath, outputFilePath, new FileSystem()) { }
+      public BinaryFileProcessor(string inputFilePath, string outputFilePath, IFileSystem fileSystem)
       {
          InputFilePath = inputFilePath;
          OutputFilePath = outputFilePath;
+         _fileSystem = fileSystem;
 
       }
 
@@ -25,9 +30,9 @@ namespace Output.Files_Streams
       {
          //IMPLEMENTATION WITH STREAM READER AND WRITER
 
-         using (FileStream inputFileStream = File.Open(InputFilePath, FileMode.Open, FileAccess.Read))
+         using (Stream inputFileStream = _fileSystem.File.Open(InputFilePath, FileMode.Open, FileAccess.Read))
          using (BinaryReader binaryStreamReader = new BinaryReader(inputFileStream))
-         using (FileStream outputFileStream = File.Create(OutputFilePath))
+         using (Stream outputFileStream = _fileSystem.File.Create(OutputFilePath))
          using (BinaryWriter binaryStreamWriter = new BinaryWriter(outputFileStream))
          {
             byte largest = 0;

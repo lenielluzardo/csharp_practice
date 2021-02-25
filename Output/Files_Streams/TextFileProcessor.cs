@@ -1,13 +1,19 @@
 ﻿using System.IO;
+using System.IO.Abstractions;
 
 namespace Output.Files_Streams
 {
    public class TextFileProcessor
    {
-      public TextFileProcessor(string inputFilePath, string outputFilePath)
+      private readonly IFileSystem _fileSystem;
+      
+      public TextFileProcessor(string inputFilePath, string outputFilePath):this(inputFilePath, outputFilePath, new FileSystem()) { }
+
+      public TextFileProcessor(string inputFilePath, string outputFilePath, IFileSystem fileSystem)
       {
          InputFilePath = inputFilePath;
          OutputFilePath = outputFilePath;
+         _fileSystem = fileSystem;
 
       }
 
@@ -41,8 +47,8 @@ namespace Output.Files_Streams
          //using (var outputStreamWriter = new StreamWriter(outputFileStream))
 
          //Simplify the creation of the stream reader and writer
-         using (var inputStreamReader = new StreamReader(InputFilePath))
-         using (var outputStreamWriter = new StreamWriter(OutputFilePath))
+         using (var inputStreamReader = _fileSystem.File.OpenText(InputFilePath))
+         using (var outputStreamWriter = _fileSystem.File.CreateText(OutputFilePath))
          {
             var currentLineNumber = 1;
             
