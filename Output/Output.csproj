@@ -15,4 +15,8 @@
     <None Remove="Algorithms_DataStructure\SinglyLinkedList.cs~RF1abee6a4.TMP" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.Caching" Version="5.0.0" />
+  </ItemGroup>
+
 </Project>
