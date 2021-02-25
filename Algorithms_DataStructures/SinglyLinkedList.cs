@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Output.Algorithms_DataStructure
+namespace Files_Streams.Algorithms_DataStructure
 {
   public class SinglyLinkedList
   {

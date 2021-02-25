@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using static System.Console;
 using System.IO;
 using System.Collections.Concurrent;
-using System.Threading;
 using System.Runtime.Caching;
+using static System.Console;
 
-namespace Output.Files_Streams
+namespace Files_Streams
 {
    /// <summary>
    /// Process files through a console application.

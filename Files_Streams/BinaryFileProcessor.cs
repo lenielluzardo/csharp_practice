@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.IO.Abstractions;
 
-namespace Output.Files_Streams
+namespace Files_Streams
 {
    public class BinaryFileProcessor
    {

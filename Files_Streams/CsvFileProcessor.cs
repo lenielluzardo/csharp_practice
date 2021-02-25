@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
-using Output.Files_Streams.Models;
+using Files_Streams.Models;
 
-namespace Output.Files_Streams
+namespace Files_Streams
 {
    public class CsvFileProcessor
    {

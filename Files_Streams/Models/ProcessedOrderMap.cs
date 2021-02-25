@@ -1,7 +1,7 @@
 ﻿using CsvHelper.Configuration;
 using System.Globalization;
 
-namespace Output.Files_Streams.Models
+namespace Files_Streams.Models
 {
    public class ProcessedOrderMap : ClassMap<ProcessedOrder>
    {

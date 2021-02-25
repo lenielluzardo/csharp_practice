@@ -1,6 +1,6 @@
 ﻿using Xunit;
 using System.IO.Abstractions.TestingHelpers;
-using Output.Files_Streams;
+using Files_Streams;
 using System.Text;
 using ApprovalTests;
 using ApprovalTests.Reporters;

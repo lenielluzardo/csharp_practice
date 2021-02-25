@@ -1,11 +1,6 @@
-﻿using Output.Algorithms_DataStructure;
-using Output.Files_Streams;
-using System;
-using System.Collections.Generic;
-using static System.Console;
-using System.IO;
+﻿using Files_Streams;
 
-namespace Output
+namespace AA_Output
 {
    /// <summary>
    /// Shared console program for all exercises in the solution.
@@ -14,18 +9,19 @@ namespace Output
    {
       static void Main(string[] args)
       {
+         #region Random Excercises
          //PalindromeExe.RunExercise();
          //FizzBuzzExe.RunExercise();
          //SinglyLinkedList.Exe();
          //DoublyLinkedList<int>.Exe();
+         #endregion
 
-         FileProcessor.ValidateConsoleArgs(args);
+         #region .Net Base Class Library
+         //FileProcessor.ValidateConsoleArgs(args);
+
+
+
+         #endregion
       }
-
-      
-     
-
-      
-      
    }
 }

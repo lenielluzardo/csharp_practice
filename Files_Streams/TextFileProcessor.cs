@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.IO.Abstractions;
 
-namespace Output.Files_Streams
+namespace Files_Streams
 {
    public class TextFileProcessor
    {
