@@ -70,12 +70,24 @@ namespace Output.Files_Streams
          WriteLine($"Moving {InputFilePath} to {inProgressFilePath}");
          File.Move(InputFilePath, inProgressFilePath);
 
-         //Determine type of file
          string extension = Path.GetExtension(InputFilePath);
+
+         string completedDirectoryPath = Path.Combine(rootDirectoryPath, CompletedDirectoryName);
+         Directory.CreateDirectory(completedDirectoryPath);
+
+         string completedFileName = $"{Path.GetFileNameWithoutExtension(InputFilePath)}-{Guid.NewGuid()}{extension}";
+         string completedFilePath = Path.Combine(completedDirectoryPath, completedFileName);
+
+         //Determine type of file
          switch (extension)
          {
             case ".txt":
-               ProcessTextFile(inProgressFilePath);
+               var textProcessor = new TextFileProcessor(inProgressFilePath, completedFilePath);
+               textProcessor.Process();
+               break;
+            case ".data":
+               var binaryProcessor = new BinaryFileProcessor(inProgressFilePath, completedFilePath);
+               binaryProcessor.Process();
                break;
             default:
                WriteLine($"{extension} is an unsupported file type.");
@@ -83,25 +95,15 @@ namespace Output.Files_Streams
 
          }
 
-         string completedDirectoryPath = Path.Combine(rootDirectoryPath, CompletedDirectoryName);
-         Directory.CreateDirectory(completedDirectoryPath);
+        
 
-         WriteLine($"Moving {inProgressFilePath} to {completedDirectoryPath}");
+         WriteLine($"Completed processing of {inProgressFilePath}");
 
-         string completedFileName = $"{Path.GetFileNameWithoutExtension(InputFilePath)}-{Guid.NewGuid()}{extension}";
-         string completedFilePath = Path.Combine(completedDirectoryPath, completedFileName);
-
-         File.Move(inProgressFilePath, completedFilePath);
+         WriteLine($"Deleting {inProgressFilePath}");
+         File.Delete(inProgressFilePath);
 
          //string inProgressDirectoryPath = Path.GetDirectoryName(inProgressFilePath); // When using cache the process of files is executed in parallel and throws an exception is inProgress folder isn't found.
          //Directory.Delete(inProgressDirectoryPath, true);
-      }
-
-      private void ProcessTextFile(string inProgressFilePath)
-      {
-         WriteLine($"Processing text file {inProgressFilePath}");
-         
-         //TODO: Read in process
       }
 
       /// <summary>
