@@ -4,10 +4,10 @@ using System.Globalization;
 using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
-using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
-using Files_Streams.Models;
+using Files_Streams.Helpers;
+using Models;
 
 namespace Files_Streams
 {

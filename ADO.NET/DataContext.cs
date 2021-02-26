@@ -1,4 +1,4 @@
-﻿using ADO.NET.Models;
+﻿using Models;
 using ADO.NET.Common;
 using System;
 using System.Collections.Generic;
@@ -48,7 +48,7 @@ namespace ADO.NET
          }
          catch (Exception ex)
          {
-
+            Console.WriteLine(ex.Message);
          }
       }
       public int GetItemsCountScalar()
@@ -90,7 +90,7 @@ namespace ADO.NET
          }
          catch (Exception ex)
          {
-
+            Console.WriteLine(ex.Message);
          }
 
          return RowsAffected;
@@ -144,7 +144,7 @@ namespace ADO.NET
                }
             }
          }
-         catch (Exception ex) { }
+         catch (Exception ex) { Console.WriteLine(ex.Message); }
       }
       public int TransactionProcessing()
       {
@@ -191,11 +191,11 @@ namespace ADO.NET
                         trn.Commit();
                      }
                   }
-                  catch (Exception ex) { trn.Rollback(); }
+                  catch (Exception ex) { trn.Rollback(); Console.WriteLine(ex.Message); }
                }
             }
          }
-         catch (Exception ex) { /* Do Something */}
+         catch (Exception ex) { Console.WriteLine(ex.Message); }
          return RowsAffected;
       }
       #endregion
@@ -537,7 +537,7 @@ namespace ADO.NET
       {
          DataTable dt;
          DataTable dtNew;
-
+         
          dt = GetItemsAsDataTable();
 
          dtNew = dt.Clone();
@@ -627,11 +627,9 @@ namespace ADO.NET
                   }
                }
             }
-         }catch(Exception ex) { }
+         }catch(Exception ex) { Console.WriteLine(ex.Message); }
          return ResultText;
-
       }
-
       #endregion
    }
 }

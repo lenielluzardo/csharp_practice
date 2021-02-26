@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Files_Streams.Models
+namespace Models
 {
    public class ProcessedOrder
    {

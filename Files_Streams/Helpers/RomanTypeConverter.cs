@@ -3,7 +3,7 @@ using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
 using System;
 
-namespace Files_Streams.Models
+namespace Files_Streams.Helpers
 {
    public class RomanTypeConverter: ITypeConverter
    {
