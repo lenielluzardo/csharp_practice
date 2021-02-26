@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -13,12 +13,6 @@
 
   <ItemGroup>
     <None Remove="Algorithms_DataStructure\SinglyLinkedList.cs~RF1abee6a4.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="CsvHelper" Version="25.0.0" />
-    <PackageReference Include="System.IO.Abstractions" Version="13.2.23" />
-    <PackageReference Include="System.Runtime.Caching" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
