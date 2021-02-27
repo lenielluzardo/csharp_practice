@@ -19,6 +19,7 @@
     <ProjectReference Include="..\ADO.NET\ADO.NET.csproj" />
     <ProjectReference Include="..\Algorithms_DataStructures\Algorithms_DataStructures.csproj" />
     <ProjectReference Include="..\Files_Streams\Files_Streams.csproj" />
+    <ProjectReference Include="..\Http_Client\Http_Client.csproj" />
   </ItemGroup>
 
 </Project>

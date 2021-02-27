@@ -1,4 +1,6 @@
 ﻿using Files_Streams;
+using Http_Client;
+using static System.Console;
 
 namespace AA_Output
 {
@@ -17,11 +19,15 @@ namespace AA_Output
          #endregion
 
          #region .Net Base Class Library
+         //## Working with Files and Streams
          //FileProcessor.ValidateConsoleArgs(args);
 
-
-
+         //## Working with Http Client
+         var client = new CRUDService();
+         client.Run();
          #endregion
+
+         ReadLine();
       }
    }
 }
