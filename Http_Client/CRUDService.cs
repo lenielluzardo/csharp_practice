@@ -23,7 +23,6 @@ namespace Http_Client
          _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
          _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml", 0.9));
       }
-
       public async Task Run()
       {
          //await GetResource();
@@ -37,7 +36,7 @@ namespace Http_Client
       /// <summary>
       /// Sends a request with a default Accept Header Content Type.
       /// </summary>
-      public async Task GetResource()
+      private async Task GetResource()
       {
          var response = await _httpClient.GetAsync("api/movies");
          response.EnsureSuccessStatusCode();
@@ -59,7 +58,7 @@ namespace Http_Client
       ///<summary>
       ///Sends a request with a non-default Accept Header Content Type.
       ///</summary>
-      public async Task GetResourceThroughHttpRequestMessage()
+      private async Task GetResourceThroughHttpRequestMessage()
       {
          var request = new HttpRequestMessage(HttpMethod.Get, "api/movies");
          request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -72,7 +71,7 @@ namespace Http_Client
          var content = await response.Content.ReadAsStringAsync();
          var movies = JsonConvert.DeserializeObject<List<Movie>>(content);
       }
-      public async Task CreateResource()
+      private async Task CreateResource()
       {
          var movieToCreate = new MovieForCreation
          {
@@ -104,7 +103,7 @@ namespace Http_Client
 
          var createdMovie = JsonConvert.DeserializeObject<Movie>(content);
       }
-      public async Task UpdateResource()
+      private async Task UpdateResource()
       {
          var movieToUpdate = new MovieForUpdate
          {
@@ -128,7 +127,7 @@ namespace Http_Client
          var content = await response.Content.ReadAsStringAsync();
          var updatedMovie = JsonConvert.DeserializeObject<Movie>(content);
       }
-      public async Task DeleteResource()
+      private async Task DeleteResource()
       {
          var request = new HttpRequestMessage(HttpMethod.Delete, "api/movies/5b1c2b4d-48c7-402a-80c3-cc796ad49c6b");
          request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -138,7 +137,7 @@ namespace Http_Client
 
          var content = await response.Content.ReadAsStringAsync();
       }
-      public async Task PatchResource()
+      private async Task PatchResource()
       {
          var patchDoc = new JsonPatchDocument<MovieForUpdate>();
          
