@@ -15,7 +15,7 @@ namespace Http_Client
    /// <summary>
    /// Provides a set of Http Request Method that improve the performance using Streams.
    /// </summary>
-   public class StreamService
+   public class StreamService : IIntegrationService
    {
       //To be able to use Gzip Compression with need to instantiate our HttpClient with an HttpClientHandler specifiying the AutomaticDecompression for Gzip.
       //The frameworks has built in the functionality but we need to explicitly specify it.

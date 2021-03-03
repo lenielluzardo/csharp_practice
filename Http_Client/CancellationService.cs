@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Http_Client
 {
-   public class CancellationService
+   public class CancellationService : IIntegrationService
    {
       private static HttpClient _httpClient = new HttpClient(
          new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip });

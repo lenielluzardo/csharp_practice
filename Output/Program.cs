@@ -1,7 +1,7 @@
-﻿using Files_Streams;
-using Http_Client;
+﻿using Http_Client;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Diagnostics;
+using System.Threading.Tasks;
 using static System.Console;
 
 namespace AA_Output
@@ -11,12 +11,15 @@ namespace AA_Output
    /// </summary>
    class Program
    {
-      static void Main(string[] args)
+      static async Task Main(string[] args)
       {
+         var serviceCollection = new ServiceCollection();
+         ConfigureServices(serviceCollection);
+         
+         var serviceProvider = serviceCollection.BuildServiceProvider();
+         
          try
          {
-            TextWriterTraceListener tr1 = new TextWriterTraceListener(Console.Out);
-            Trace.Listeners.Add(tr1);
             #region Random Excercises
             //PalindromeExe.RunExercise();
             //FizzBuzzExe.RunExercise();
@@ -29,19 +32,36 @@ namespace AA_Output
             //FileProcessor.ValidateConsoleArgs(args);
 
             //## Working with Http Client
-            var client = new HttpClientFactoryInstanceManagementService();
-            client.Run();
-            #endregion
+            await serviceProvider.GetService<IIntegrationService>().Run();
 
-            Trace.Flush();
+            #endregion
             
          }
          catch(Exception ex)
          {
             WriteLine(ex.ToString());
          }
-        
-         ReadLine();
+
+         ReadKey();
+
       }
+
+      #region Configuration
+      private static void ConfigureServices(IServiceCollection serviceCollection)
+      {
+         serviceCollection.AddHttpClient();
+
+
+         //········ CUSTOM SERVICES ·········
+
+         //serviceCollection.AddScoped<IIntegrationService, CRUDService>();
+         //serviceCollection.AddScoped<IIntegrationService, PartialUpdateService>();
+         //serviceCollection.AddScoped<IIntegrationService, StreamService>();
+         //serviceCollection.AddScoped<IIntegrationService, CancellationService>();
+         serviceCollection.AddScoped<IIntegrationService, HttpClientFactoryInstanceManagementService>();
+         //serviceCollection.AddScoped<IIntegrationService, DealingWithErrorsAndFaultsService>();
+         //serviceCollection.AddScoped<IIntegrationService, HttpHandlersService>();     
+      }
+      #endregion 
    }
 }

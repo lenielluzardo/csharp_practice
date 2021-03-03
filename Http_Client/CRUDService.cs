@@ -12,7 +12,7 @@ using System.Xml.Serialization;
 
 namespace Http_Client
 {
-   public class CRUDService
+   public class CRUDService : IIntegrationService
    {
       private static HttpClient _httpClient = new HttpClient();
       public CRUDService()

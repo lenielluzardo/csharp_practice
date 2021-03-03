@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ADO.NET\ADO.NET.csproj" />
     <ProjectReference Include="..\Algorithms_DataStructures\Algorithms_DataStructures.csproj" />
     <ProjectReference Include="..\Files_Streams\Files_Streams.csproj" />
