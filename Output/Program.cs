@@ -1,5 +1,6 @@
 ﻿using Http_Client;
 using Http_Client.CustomClients;
+using Http_Client.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
@@ -17,9 +18,9 @@ namespace AA_Output
       {
          var serviceCollection = new ServiceCollection();
          ConfigureServices(serviceCollection);
-         
+
          var serviceProvider = serviceCollection.BuildServiceProvider();
-         
+
          try
          {
             #region Random Excercises
@@ -37,9 +38,9 @@ namespace AA_Output
             await serviceProvider.GetService<IIntegrationService>().Run();
 
             #endregion
-            
+
          }
-         catch(Exception ex)
+         catch (Exception ex)
          {
             WriteLine(ex.ToString());
          }
@@ -58,6 +59,8 @@ namespace AA_Output
             client.Timeout = new TimeSpan(0, 0, 0, 30, 500);
             client.DefaultRequestHeaders.Clear(); //Clear it before setup in case other code has setted.
          })
+         .AddHttpMessageHandler(handler => new TimeOutDelegatingHandler(TimeSpan.FromSeconds(20)))
+         .AddHttpMessageHandler(handler => new RetryPolicyDelegatingHandler(3))
          .ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler()
          {
             AutomaticDecompression = System.Net.DecompressionMethods.GZip
@@ -86,8 +89,8 @@ namespace AA_Output
          //serviceCollection.AddScoped<IIntegrationService, StreamService>();
          //serviceCollection.AddScoped<IIntegrationService, CancellationService>();
          //serviceCollection.AddScoped<IIntegrationService, HttpClientFactoryInstanceManagementService>();
-         serviceCollection.AddScoped<IIntegrationService, DealingWithErrorsAndFaultsService>();
-         //serviceCollection.AddScoped<IIntegrationService, HttpHandlersService>();   
+         //serviceCollection.AddScoped<IIntegrationService, DealingWithErrorsAndFaultsService>();
+         serviceCollection.AddScoped<IIntegrationService, HttpHandlersService>();
 
          #endregion
 
