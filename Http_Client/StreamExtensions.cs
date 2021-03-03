@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Http_Client
 {
@@ -11,6 +12,7 @@ namespace Http_Client
    /// </summary>
    public static class StreamExtensions
    {
+    
       public static T ReadAndDeserializeFromJson<T>(this Stream stream)
       {
          if(stream == null)

@@ -85,10 +85,10 @@ namespace AA_Output
          //serviceCollection.AddScoped<IIntegrationService, PartialUpdateService>();
          //serviceCollection.AddScoped<IIntegrationService, StreamService>();
          //serviceCollection.AddScoped<IIntegrationService, CancellationService>();
-         serviceCollection.AddScoped<IIntegrationService, HttpClientFactoryInstanceManagementService>();
-         //serviceCollection.AddScoped<IIntegrationService, DealingWithErrorsAndFaultsService>();
+         //serviceCollection.AddScoped<IIntegrationService, HttpClientFactoryInstanceManagementService>();
+         serviceCollection.AddScoped<IIntegrationService, DealingWithErrorsAndFaultsService>();
          //serviceCollection.AddScoped<IIntegrationService, HttpHandlersService>();   
-         
+
          #endregion
 
       }
