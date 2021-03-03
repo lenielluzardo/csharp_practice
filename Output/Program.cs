@@ -1,6 +1,8 @@
 ﻿using Http_Client;
+using Http_Client.CustomClients;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using static System.Console;
 
@@ -46,11 +48,36 @@ namespace AA_Output
 
       }
 
-      #region Configuration
       private static void ConfigureServices(IServiceCollection serviceCollection)
       {
-         serviceCollection.AddHttpClient();
+         #region Http Client Configuration
+         //Register custom clients with strings as Key for its instantiation/configuration.
+         serviceCollection.AddHttpClient("MoviesClient", client =>
+         {
+            client.BaseAddress = new Uri("http://localhost:57863/");
+            client.Timeout = new TimeSpan(0, 0, 0, 30, 500);
+            client.DefaultRequestHeaders.Clear(); //Clear it before setup in case other code has setted.
+         })
+         .ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler()
+         {
+            AutomaticDecompression = System.Net.DecompressionMethods.GZip
+         });
 
+         //Register custom clients with custom types for its instantiation/configuration.
+         serviceCollection.AddHttpClient<MoviesClient>()
+
+         // ··········· This configuration can be achieved within the class.············
+         //(client => 
+         //{
+         //   client.BaseAddress = new Uri("http://localhost:57863/");    
+         //   client.Timeout = new TimeSpan(0, 0, 0, 30, 500);
+         //   client.DefaultRequestHeaders.Clear();
+         //})
+         // ·············································································
+         .ConfigurePrimaryHttpMessageHandler(handler => new HttpClientHandler()
+         {
+            AutomaticDecompression = System.Net.DecompressionMethods.GZip
+         });
 
          //········ CUSTOM SERVICES ·········
 
@@ -60,8 +87,10 @@ namespace AA_Output
          //serviceCollection.AddScoped<IIntegrationService, CancellationService>();
          serviceCollection.AddScoped<IIntegrationService, HttpClientFactoryInstanceManagementService>();
          //serviceCollection.AddScoped<IIntegrationService, DealingWithErrorsAndFaultsService>();
-         //serviceCollection.AddScoped<IIntegrationService, HttpHandlersService>();     
+         //serviceCollection.AddScoped<IIntegrationService, HttpHandlersService>();   
+         
+         #endregion
+
       }
-      #endregion 
    }
 }
