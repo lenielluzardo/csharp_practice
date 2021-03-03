@@ -1,5 +1,4 @@
-﻿using Http_Client.CustomClients;
-using Movies.Client.Models;
+﻿using Http_Client.Customs;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -7,10 +6,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
+using ZZ_Common.Interfaces;
+using ZZ_Common.Models;
 
 namespace Http_Client
 {
-   public class HttpClientFactoryInstanceManagementService : IIntegrationService
+   public class HttpClientFactoryInstanceManagementService : IHttpClientService
    {
       private readonly IHttpClientFactory _httpClientFactory;
       private readonly MoviesClient _moviesClient;

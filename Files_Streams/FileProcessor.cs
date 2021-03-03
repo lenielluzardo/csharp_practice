@@ -3,13 +3,15 @@ using System.IO;
 using System.Collections.Concurrent;
 using System.Runtime.Caching;
 using static System.Console;
+using System.Threading.Tasks;
+using ZZ_Common.Interfaces;
 
 namespace Files_Streams
 {
    /// <summary>
    /// Process files through a console application.
    /// </summary>
-   public class FileProcessor
+   public class FileProcessor: IFileProcessorService
    {
       private static readonly string BackupDirectoryName = "backup";
       private static readonly string InProgressDirectoryName = "processing";
@@ -24,6 +26,10 @@ namespace Files_Streams
 
       public string InputFilePath { get; }
 
+      public void Run(string[] args)
+      {
+         ValidateConsoleArgs(args);
+      }
       public void Process()
       {
          WriteLine($"Begin process of {InputFilePath}");
@@ -136,7 +142,9 @@ namespace Files_Streams
          }
 
       }
+     
       #region Console Arguments Validations
+     
       /// <summary>
       /// Checks if the arguments passed to the console are supported.
       /// </summary>
@@ -179,7 +187,6 @@ namespace Files_Streams
 
 
       }
-
       private static void ProcessExistingFiles(string inputDirectory)
       {
          WriteLine($"Checking {inputDirectory} for existing files");
@@ -192,8 +199,6 @@ namespace Files_Streams
          
       }
 
-
-
       /// <summary>
       /// Checks if the arguments passed to the console are supported.
       /// </summary>
@@ -201,8 +206,7 @@ namespace Files_Streams
       public static void ValidateIndividualConsoleArgs(string[] args)
       {
          var command = args[0];
-
-
+         
          if (command == "--file")
          {
             var filePath = args[1];
@@ -231,17 +235,14 @@ namespace Files_Streams
       {
          WriteLine($"ERROR: file system watching may no longer be active: {e.GetException()}");
       }
-
       private static void FileRenamed(object sender, RenamedEventArgs e)
       {
          WriteLine($"* File renamed: {e.Name} - type: {e.ChangeType}");
       }
-
       private static void FileDeleted(object sender, FileSystemEventArgs e)
       {
          WriteLine($"* File deleted: {e.Name} - type: {e.ChangeType}");
       }
-
       private static void FileChanged(object sender, FileSystemEventArgs e)
       {
          WriteLine($"* File changed: {e.Name} - type: {e.ChangeType}");
@@ -260,6 +261,7 @@ namespace Files_Streams
          //FilesToProcessDictionary.TryAdd(e.FullPath, e.FullPath); // Use this for FilesToProcess ConcurrentDictionary
       }
       #endregion
+      
       private static void AddToCache(string fullPath)
       {
          var item = new CacheItem(fullPath, fullPath);
@@ -271,7 +273,6 @@ namespace Files_Streams
          };
 
          FilesToProcessCache.Add(item, policy);
-
       }
       private static void ProcessFilesWithCache(CacheEntryRemovedArguments args)
       {
@@ -299,5 +300,6 @@ namespace Files_Streams
          }
       }
 
+     
    }
 }

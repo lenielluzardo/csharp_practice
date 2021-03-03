@@ -1,18 +1,17 @@
-﻿using Movies.Client.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Marvin.StreamExtensions;
+using ZZ_Common.Interfaces;
+using ZZ_Common.Models;
 
 namespace Http_Client
 {
-   public class DealingWithErrorsAndFaultsService : IIntegrationService
+   public class DealingWithErrorsAndFaultsService : IHttpClientService
    {
       private readonly IHttpClientFactory _httpClientFactory;
       private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();

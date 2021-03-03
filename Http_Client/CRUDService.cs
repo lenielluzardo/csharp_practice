@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
-using Movies.Client.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,10 +8,12 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using ZZ_Common.Interfaces;
+using ZZ_Common.Models;
 
 namespace Http_Client
 {
-   public class CRUDService : IIntegrationService
+   public class CRUDService : IHttpClientService
    {
       private static HttpClient _httpClient = new HttpClient();
       public CRUDService()

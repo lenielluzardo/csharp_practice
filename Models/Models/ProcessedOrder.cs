@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Models
+namespace ZZ_Common.Models
 {
    public class ProcessedOrder
    {

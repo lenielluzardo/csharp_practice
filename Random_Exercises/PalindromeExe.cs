@@ -1,38 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using ZZ_Common.Interfaces;
 
 namespace Random_Exercises
 {
-    public class PalindromeExe
-    {
-        public bool CheckPalindrome(string word)
-        {
-            char[] wordArray = word.ToCharArray();
-            Array.Reverse(wordArray);
+   public class PalindromeExe : IRandomExercisesService
+   {
+      public void Run(string[] args = null)
+      {
+         var palindromeExe = new PalindromeExe();
 
-            string reverseWord = new string(wordArray);
+         Console.WriteLine("Write a word to check if is a Palindrome:....");
+         var input = Console.ReadLine();
 
-            if (word.Equals(reverseWord, StringComparison.OrdinalIgnoreCase))
-                return true;
-            else
-                return false;
-        }
+         var isPalindrome = palindromeExe.CheckPalindrome(input);
 
-        public static void RunExercise()
-        {
-            var palindromeExe = new PalindromeExe();
+         if (isPalindrome)
+            Console.WriteLine("The word is a Palindrome");
+         else
+            Console.WriteLine("The word is not a Palindrome");
+      }
+      private bool CheckPalindrome(string word)
+      {
+         char[] wordArray = word.ToCharArray();
+         Array.Reverse(wordArray);
 
-            Console.WriteLine("Write a word to check if is a Palindrome:....");
-            var input = Console.ReadLine();
+         string reverseWord = new string(wordArray);
 
-            var isPalindrome = palindromeExe.CheckPalindrome(input);
+         if (word.Equals(reverseWord, StringComparison.OrdinalIgnoreCase))
+            return true;
+         else
+            return false;
+      }
 
-            if (isPalindrome)
-                Console.WriteLine("The word is a Palindrome");
-            else
-                Console.WriteLine("The word is not a Palindrome");
-        }
-        
-    }
+   }
 }

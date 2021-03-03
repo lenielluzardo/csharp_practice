@@ -6,10 +6,12 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ZZ_Common.Interfaces;
+
 
 namespace Http_Client
 {
-   public class HttpHandlersService : IIntegrationService
+   public class HttpHandlersService : IHttpClientService
    {
       private readonly IHttpClientFactory _httpClientFactory;
       private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();

@@ -1,10 +1,14 @@
-﻿using Http_Client;
-using Http_Client.CustomClients;
+﻿using Files_Streams;
+using Files_Streams.Algorithms_DataStructure;
+using Http_Client;
+using Http_Client.Customs;
 using Http_Client.Handlers;
 using Microsoft.Extensions.DependencyInjection;
+using Random_Exercises;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using ZZ_Common.Interfaces;
 using static System.Console;
 
 namespace AA_Output
@@ -23,22 +27,7 @@ namespace AA_Output
 
          try
          {
-            #region Random Excercises
-            //PalindromeExe.RunExercise();
-            //FizzBuzzExe.RunExercise();
-            //SinglyLinkedList.Exe();
-            //DoublyLinkedList<int>.Exe();
-            #endregion
-
-            #region .Net Base Class Library
-            //## Working with Files and Streams
-            //FileProcessor.ValidateConsoleArgs(args);
-
-            //## Working with Http Client
-            await serviceProvider.GetService<IIntegrationService>().Run();
-
-            #endregion
-
+            serviceProvider.GetService<IRegexService>().Run();
          }
          catch (Exception ex)
          {
@@ -46,13 +35,27 @@ namespace AA_Output
          }
 
          ReadKey();
-
       }
 
       private static void ConfigureServices(IServiceCollection serviceCollection)
       {
+         #region Random Excercises
+         serviceCollection.AddScoped<IRandomExercisesService, PalindromeExe>();
+         serviceCollection.AddScoped<IRandomExercisesService, FizzBuzzExe>();
+         #endregion
+
+         #region Algorithm And Data Structures
+         //serviceCollection.AddScoped<IAlgorithDataStructureService, SinglyLinkedList>();
+         //serviceCollection.AddScoped<IAlgorithDataStructureService, DoublyLinkedList>();
+         #endregion
+
+         #region File Processor Configuration
+         serviceCollection.AddScoped<IFileProcessorService, FileProcessor>();
+         #endregion
+
          #region Http Client Configuration
-         //Register custom clients with strings as Key for its instantiation/configuration.
+
+         //Register custom clients with strings as Key for its instantiation/ configuration.
          serviceCollection.AddHttpClient("MoviesClient", client =>
          {
             client.BaseAddress = new Uri("http://localhost:57863/");
@@ -66,7 +69,7 @@ namespace AA_Output
             AutomaticDecompression = System.Net.DecompressionMethods.GZip
          });
 
-         //Register custom clients with custom types for its instantiation/configuration.
+         //Register custom clients with custom types for its instantiation/ configuration.
          serviceCollection.AddHttpClient<MoviesClient>()
 
          // ··········· This configuration can be achieved within the class.············
@@ -82,17 +85,15 @@ namespace AA_Output
             AutomaticDecompression = System.Net.DecompressionMethods.GZip
          });
 
-         //········ CUSTOM SERVICES ·········
-
-         //serviceCollection.AddScoped<IIntegrationService, CRUDService>();
-         //serviceCollection.AddScoped<IIntegrationService, PartialUpdateService>();
-         //serviceCollection.AddScoped<IIntegrationService, StreamService>();
-         //serviceCollection.AddScoped<IIntegrationService, CancellationService>();
-         //serviceCollection.AddScoped<IIntegrationService, HttpClientFactoryInstanceManagementService>();
-         //serviceCollection.AddScoped<IIntegrationService, DealingWithErrorsAndFaultsService>();
-         serviceCollection.AddScoped<IIntegrationService, HttpHandlersService>();
+         serviceCollection.AddScoped<IHttpClientService, CRUDService>();
+         //serviceCollection.AddScoped<IHttpClientService, StreamService>();
+         //serviceCollection.AddScoped<IHttpClientService, CancellationService>();
+         //serviceCollection.AddScoped<IHttpClientService, HttpClientFactoryInstanceManagementService>();
+         //serviceCollection.AddScoped<IHttpClientService, DealingWithErrorsAndFaultsService>();
+         //serviceCollection.AddScoped<IHttpClientService, HttpHandlersService>();
 
          #endregion
+
 
       }
    }

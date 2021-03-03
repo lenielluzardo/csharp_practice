@@ -1,4 +1,5 @@
-﻿using Movies.Client.Models;
+﻿using ZZ_Common.Interfaces;
+using ZZ_Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Http_Client
 {
-   public class CancellationService : IIntegrationService
+   public class CancellationService : IHttpClientService
    {
       private static HttpClient _httpClient = new HttpClient(
          new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip });

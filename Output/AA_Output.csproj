@@ -24,6 +24,7 @@
     <ProjectReference Include="..\Algorithms_DataStructures\Algorithms_DataStructures.csproj" />
     <ProjectReference Include="..\Files_Streams\Files_Streams.csproj" />
     <ProjectReference Include="..\Http_Client\Http_Client.csproj" />
+    <ProjectReference Include="..\Random_Exercises\Random_Exercises.csproj" />
   </ItemGroup>
 
 </Project>

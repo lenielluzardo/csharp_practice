@@ -1,21 +1,20 @@
-﻿using Movies.Client.Models;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
+using ZZ_Common.Interfaces;
+using ZZ_Common.Models;
 
 namespace Http_Client
 {
    /// <summary>
    /// Provides a set of Http Request Method that improve the performance using Streams.
    /// </summary>
-   public class StreamService : IIntegrationService
+   public class StreamService : IHttpClientService
    {
       //To be able to use Gzip Compression with need to instantiate our HttpClient with an HttpClientHandler specifiying the AutomaticDecompression for Gzip.
       //The frameworks has built in the functionality but we need to explicitly specify it.

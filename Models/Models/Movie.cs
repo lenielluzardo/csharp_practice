@@ -4,7 +4,7 @@
 // </auto-generated>
 //----------------------
 
-namespace Movies.Client.Models
+namespace ZZ_Common.Models
 {
 #pragma warning disable // Disable all warnings
 

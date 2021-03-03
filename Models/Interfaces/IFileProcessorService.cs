@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Http_Client
+namespace ZZ_Common.Interfaces
 {
-   public interface IIntegrationService
+   public interface IFileProcessorService
    {
-      Task Run();
+      void Run(string[] args);
    }
 }
