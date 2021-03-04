@@ -5,6 +5,7 @@ using Http_Client.Customs;
 using Http_Client.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 using Random_Exercises;
+using Regular_Expressions;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -92,6 +93,10 @@ namespace AA_Output
          //serviceCollection.AddScoped<IHttpClientService, DealingWithErrorsAndFaultsService>();
          //serviceCollection.AddScoped<IHttpClientService, HttpHandlersService>();
 
+         #endregion
+
+         #region Regular Expressions
+         serviceCollection.AddScoped<IRegexService, RegularExpressionService>();
          #endregion
 
 
