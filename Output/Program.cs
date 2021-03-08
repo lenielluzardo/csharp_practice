@@ -3,6 +3,7 @@ using Files_Streams.Algorithms_DataStructure;
 using Http_Client;
 using Http_Client.Customs;
 using Http_Client.Handlers;
+using Json;
 using Microsoft.Extensions.DependencyInjection;
 using Random_Exercises;
 using Regular_Expressions;
@@ -28,7 +29,7 @@ namespace AA_Output
 
          try
          {
-            serviceProvider.GetService<IRegexService>().Run();
+            serviceProvider.GetService<IJsonProcessorService>().Run();
          }
          catch (Exception ex)
          {
@@ -96,10 +97,12 @@ namespace AA_Output
          #endregion
 
          #region Regular Expressions
-         serviceCollection.AddScoped<IRegexService, RegularExpressionService>();
+         //serviceCollection.AddScoped<IRegexService, RegularExpressionService>();
          #endregion
 
-
+         #region Json Processor
+         serviceCollection.AddScoped<IJsonProcessorService, JsonProcessorService>();
+         #endregion
       }
    }
 }
